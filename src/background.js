@@ -5,6 +5,7 @@ import {
   createProtocol,
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
+import './backend'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -31,7 +32,8 @@ function createWindow () {
   }
 
   win.webContents.on('did-finish-load', () => {
-    console.log('terminou!')
+    const {title, version} = require('../package.json');
+    win.setTitle(`${title} :: ${version}`)
   })
 
   win.on('closed', () => {
